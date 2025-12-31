@@ -6,6 +6,8 @@ other files are rubbish.
 
 I have no idea why the efficiency gap is so so large.
 
+main_marisa.py is the most efficient.
+
 It seems that python do not have efficient trie library.
 
 ---
