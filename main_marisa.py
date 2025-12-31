@@ -16,6 +16,8 @@ def ip_to_bitstring(net: ipaddress._BaseNetwork) -> str:
     prefixlen = net.prefixlen
     maxlen = net.max_prefixlen
     prefix_int = addr_int >> (maxlen - prefixlen)
+    if prefixlen == 0:
+        return ""
     bitstr = format(prefix_int, 'b').zfill(prefixlen)
     return bitstr
 
@@ -78,7 +80,8 @@ def main():
         pos = len(vals)
         keys.append(key)
         vals.append(bit)
-        key_to_index[key] = pos
+        if key not in key_to_index:
+            key_to_index[key] = pos
 
     # Build marisa trie from unique keys (keys of key_to_index)
     trie_keys = list(key_to_index.keys())

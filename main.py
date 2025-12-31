@@ -13,6 +13,8 @@ def ip_to_bitstring(net: ipaddress._BaseNetwork) -> str:
     """
     addr_int = int(net.network_address)
     prefixlen = net.prefixlen
+    if prefixlen == 0:
+        return ""
     maxlen = net.max_prefixlen
     prefix_int = addr_int >> (maxlen - prefixlen)
     bitstr = format(prefix_int, 'b').zfill(prefixlen)
@@ -75,7 +77,8 @@ def main():
 
         key = ip_to_bitstring(net)
         # store into datrie (if duplicate keys appear, last one wins)
-        trie[key] = i
+        if not key in trie:
+            trie[key] = i
         keys.append(key)
         vals.append(bit)
 
