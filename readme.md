@@ -23,3 +23,13 @@ It seems that python do not have efficient trie library.
 输出：
 
 rule 的 match 情况。
+
+---
+
+`time python main_marisa.py < data_1e6.txt > /dev/null`
+
+1e6 规则 1e6 询问大概 8.5s
+
+`time python main_marisa.py < data_1e5.txt > /dev/null`
+
+1e5 规则 1e5 询问大概 0.77s
