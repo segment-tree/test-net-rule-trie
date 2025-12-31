@@ -76,7 +76,7 @@ def main():
             continue
 
         key = ip_to_bitstring(net)
-        # append to lists; store mapping key->position (last write wins)
+        # append to lists; store mapping key->position (first write wins)
         pos = len(vals)
         keys.append(key)
         vals.append(bit)
