@@ -83,7 +83,7 @@ def parse_args():
 def main():
     args = parse_args()
     print(f"Generating n={args.n} rules and queries into {args.out} (chunk={args.chunk})", file=sys.stderr)
-    write_data(args.out, args.n,1_000_000, seed=args.seed, chunk_size=args.chunk)
+    write_data(args.out, 1_000_000, args.n, seed=args.seed, chunk_size=args.chunk)
     print("Done", file=sys.stderr)
 
 
