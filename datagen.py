@@ -43,7 +43,7 @@ def gen_queries_chunk(rng, chunk_size):
         yield f"{ipaddress.IPv4Address(int(a))}\n"
 
 
-def write_data(out_path, n, seed=None, chunk_size=100_000):
+def write_data(out_path, n, m, seed=None, chunk_size=100_000):
     rng = np.random.default_rng(seed)
     with open(out_path, 'w') as f:
         # write n
@@ -59,16 +59,16 @@ def write_data(out_path, n, seed=None, chunk_size=100_000):
             print(f"Wrote {written}/{n} rules", file=sys.stderr)
 
         # write m (same as n)
-        f.write(f"{n}\n")
+        f.write(f"{m}\n")
 
         # queries in chunks
         written_q = 0
-        while written_q < n:
-            this = min(chunk_size, n - written_q)
+        while written_q < m:
+            this = min(chunk_size, m - written_q)
             for line in gen_queries_chunk(rng, this):
                 f.write(line)
             written_q += this
-            print(f"Wrote {written_q}/{n} queries", file=sys.stderr)
+            print(f"Wrote {written_q}/{m} queries", file=sys.stderr)
 
 
 def parse_args():
@@ -83,7 +83,7 @@ def parse_args():
 def main():
     args = parse_args()
     print(f"Generating n={args.n} rules and queries into {args.out} (chunk={args.chunk})", file=sys.stderr)
-    write_data(args.out, args.n, seed=args.seed, chunk_size=args.chunk)
+    write_data(args.out, args.n,1_000_000, seed=args.seed, chunk_size=args.chunk)
     print("Done", file=sys.stderr)
 
 
